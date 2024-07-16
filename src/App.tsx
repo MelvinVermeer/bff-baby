@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useOptimistic, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -10,9 +10,7 @@ function App() {
       .then((data) => setTodos(data));
   }, []);
 
-  const addTodoAction = async (formData: FormData) => {
-    const newTodo = formData.get("todoItem");
-
+  const addTodo = async (newTodo: string) => {
     await fetch("http://localhost:4000", {
       method: "POST",
       headers: {
@@ -24,24 +22,37 @@ function App() {
     setTodos([...todos, newTodo as string]);
   };
 
-  return <TodoList todos={todos} addTodoAction={addTodoAction} />;
+  return <TodoList todos={todos} addTodo={addTodo} />;
 }
 
 type TodoListProps = {
-  addTodoAction: (formData: FormData) => Promise<void>;
+  addTodo: (newTodo: string) => Promise<void>;
   todos: string[];
 };
 
-const TodoList = ({ todos, addTodoAction }: TodoListProps) => {
+const TodoList = ({ todos, addTodo }: TodoListProps) => {
+  const [optimisticTodos, addOptimisticTodo] = useOptimistic(
+    todos,
+    (current, newTodo: string) => {
+      return [...current, newTodo];
+    }
+  );
+
+  const submitAction = async (formData: FormData) => {
+    const newTodo = formData.get("todoItem") as string;
+    addOptimisticTodo(newTodo);
+    await addTodo(newTodo);
+  };
+
   return (
     <div>
-      <form action={addTodoAction}>
+      <form action={submitAction}>
         <input name="todoItem" type="text" />
         <button type="submit">Add</button>
       </form>
 
       <ul>
-        {todos.map((todo) => (
+        {optimisticTodos.map((todo) => (
           <li key={todo}>{todo}</li>
         ))}
       </ul>
