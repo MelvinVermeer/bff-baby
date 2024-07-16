@@ -1,22 +1,28 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
+import postgres from "postgres";
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-const todos = ["Buy milk", "Buy eggs", "Buy bread"];
+const sql = postgres(process.env.POSTGRES_URL!, {
+  ssl: "allow",
+});
 
-const DELAY = 800;
+const DELAY = 500;
 
 app.get("/", async (req: Request, res: Response) => {
   await new Promise((resolve) => setTimeout(resolve, DELAY));
-  res.json(todos);
+
+  const results = await sql`SELECT * FROM todos`;
+  res.json(results.map((row) => row.todo));
 });
 
 app.post("/", async (req: Request, res: Response) => {
   await new Promise((resolve) => setTimeout(resolve, DELAY));
-  req.body.todo && todos.push(req.body.todo);
+
+  await sql`INSERT INTO todos (todo) VALUES (${req.body.todo})`;
   res.sendStatus(201);
 });
 
