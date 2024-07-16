@@ -1,21 +1,22 @@
 "use server";
 import { revalidatePath } from "next/cache";
+import postgres from "postgres";
+
+const sql = postgres(process.env.POSTGRES_URL!, {
+  ssl: "allow",
+});
 
 export const saveTodoAction = async (formData: FormData) => {
   const newTodo = formData.get("todoItem") as string;
 
-  await fetch("http://localhost:4000", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ todo: newTodo }),
-  });
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  await sql`INSERT INTO todos (todo) VALUES (${newTodo})`;
 
   revalidatePath("/");
 };
 
 export const getTodos = async () => {
-  const response = await fetch("http://localhost:4000");
-  return response.json();
+  const results = await sql`SELECT * FROM todos`;
+  return results.map((row) => row.todo);
 };
