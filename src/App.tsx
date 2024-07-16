@@ -1,24 +1,16 @@
 import { useEffect, useOptimistic, useState } from "react";
 import "./App.css";
+import { getTodos, saveTodo } from "./actions";
 
 function App() {
   const [todos, setTodos] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000")
-      .then((response) => response.json())
-      .then((data) => setTodos(data));
+    getTodos().then((data) => setTodos(data));
   }, []);
 
   const addTodo = async (newTodo: string) => {
-    await fetch("http://localhost:4000", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ todo: newTodo }),
-    });
-
+    await saveTodo(newTodo);
     setTodos([...todos, newTodo as string]);
   };
 
