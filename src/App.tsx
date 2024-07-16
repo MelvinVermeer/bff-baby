@@ -11,18 +11,28 @@ function App() {
   }, []);
 
   const addTodoAction = async (formData: FormData) => {
+    const newTodo = formData.get("todoItem");
+
     await fetch("http://localhost:4000", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ todo: formData.get("todoItem") }),
+      body: JSON.stringify({ todo: newTodo }),
     });
 
-    const newTodo = formData.get("todoItem");
     setTodos([...todos, newTodo as string]);
   };
 
+  return <TodoList todos={todos} addTodoAction={addTodoAction} />;
+}
+
+type TodoListProps = {
+  addTodoAction: (formData: FormData) => Promise<void>;
+  todos: string[];
+};
+
+const TodoList = ({ todos, addTodoAction }: TodoListProps) => {
   return (
     <div>
       <form action={addTodoAction}>
@@ -37,6 +47,6 @@ function App() {
       </ul>
     </div>
   );
-}
+};
 
 export default App;
