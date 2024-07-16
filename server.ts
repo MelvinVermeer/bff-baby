@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(cors());
 const todos = ["Buy milk", "Buy eggs", "Buy bread"];
 
-const DELAY = 500;
+const DELAY = 800;
 
 app.get("/", async (req: Request, res: Response) => {
   await new Promise((resolve) => setTimeout(resolve, DELAY));
