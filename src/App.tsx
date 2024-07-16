@@ -1,10 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [todos, setTodos] = useState<string[]>(["Buy milk", "Buy eggs"]);
+  const [todos, setTodos] = useState<string[]>([]);
 
-  const addTodoAction = (formData: FormData) => {
+  useEffect(() => {
+    fetch("http://localhost:4000")
+      .then((response) => response.json())
+      .then((data) => setTodos(data));
+  }, []);
+
+  const addTodoAction = async (formData: FormData) => {
+    await fetch("http://localhost:4000", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ todo: formData.get("todoItem") }),
+    });
+
     const newTodo = formData.get("todoItem");
     setTodos([...todos, newTodo as string]);
   };
