@@ -1,0 +1,38 @@
+{
+  "node": {
+    "117d11263a254a2aa51e5dc7e6a40b4c746c8095": {
+      "workers": {
+        "app/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fmelvinvermeer%2Fdev%2Fbff-baby%2Fapp%2Factions.ts%22%2C%5B%22%24%24ACTION_0%22%2C%22saveTodoAction%22%2C%22getTodos%22%2C%22%24%24ACTION_1%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/page": "rsc"
+      }
+    },
+    "5818014e726b20ef679a4d7f211f670899cb219d": {
+      "workers": {
+        "app/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fmelvinvermeer%2Fdev%2Fbff-baby%2Fapp%2Factions.ts%22%2C%5B%22%24%24ACTION_0%22%2C%22saveTodoAction%22%2C%22getTodos%22%2C%22%24%24ACTION_1%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/page": "rsc"
+      }
+    },
+    "99efd20b10b0bf8cc79ea7ac740c4ebf25d49cbb": {
+      "workers": {
+        "app/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fmelvinvermeer%2Fdev%2Fbff-baby%2Fapp%2Factions.ts%22%2C%5B%22%24%24ACTION_0%22%2C%22saveTodoAction%22%2C%22getTodos%22%2C%22%24%24ACTION_1%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/page": "rsc"
+      }
+    },
+    "cca47986aa8f9fe7cf0968ede7d5409ae5c3273e": {
+      "workers": {
+        "app/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fmelvinvermeer%2Fdev%2Fbff-baby%2Fapp%2Factions.ts%22%2C%5B%22%24%24ACTION_0%22%2C%22saveTodoAction%22%2C%22getTodos%22%2C%22%24%24ACTION_1%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/page": "rsc"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "qFv0n7OPlA+VWzDitIA9TG3l1v49sz8llfAegwgHxz8="
+}
