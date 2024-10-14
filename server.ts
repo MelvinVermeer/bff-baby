@@ -26,6 +26,11 @@ app.post("/", async (req: Request, res: Response) => {
   res.sendStatus(201);
 });
 
+app.get("/reset", async (req: Request, res: Response) => {
+  await sql`DELETE FROM todos`;
+  res.sendStatus(200);
+});
+
 app.listen(4000, () => {
   console.log(`Server running at http://localhost:${4000}`);
 });
