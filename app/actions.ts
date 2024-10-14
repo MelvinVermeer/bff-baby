@@ -9,7 +9,7 @@ const sql = postgres(process.env.POSTGRES_URL!, {
 export const saveTodoAction = async (formData: FormData) => {
   const newTodo = formData.get("todoItem") as string;
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 500));
 
   await sql`INSERT INTO todos (todo) VALUES (${newTodo})`;
 
